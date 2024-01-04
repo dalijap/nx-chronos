@@ -98,8 +98,8 @@ function QueryThreadCycleTime(ThreadHandle: THandle; var CycleTime: UInt64): Byt
 implementation
 
 {$IFNDEF DELPHI_TOKYO_UP}
-function QueryProcessCycleTime; external kernel32 name 'QueryProcessCycleTime';
-function QueryThreadCycleTime; external kernel32 name 'QueryThreadCycleTime';
+function QueryProcessCycleTime; external kernel32 name 'QueryProcessCycleTime' delayed;
+function QueryThreadCycleTime; external kernel32 name 'QueryThreadCycleTime' delayed;
 {$ENDIF}
 
 
