@@ -7,7 +7,10 @@ allows measuring different times: real time, process time, and thread time,
 including highly accurate process cycles and thread cycles. 
 
 If you are measuring cycles, you will only be able to get a raw `Elapsed` value
-that cannot be converted to nanoseconds, milliseconds, or seconds
+that cannot be converted to nanoseconds, milliseconds, or seconds. 
+
+`ProcessCycles` and `ThreadCycles` measuring modes are supported only Windows
+Vista and newer OS.
 
 ## Supported platforms
 

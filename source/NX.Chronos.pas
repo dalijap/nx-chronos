@@ -2,7 +2,7 @@
 
 MIT License
 
-Copyright (c) 2021-2023 Dalija Prasnikar
+Copyright (c) 2021-2024 Dalija Prasnikar
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -60,6 +60,10 @@ uses
   System.Classes;
 
 type
+    ///  <remarks>
+    ///    ProcessCycles and ThreadCycles measuring modes are supported 
+    ///    only Windows Vista and newer OS.
+    ///  </remarks>
   TNxChronoMode = (CalendarTime, ProcessTime, ThreadTime, ProcessCycles, ThreadCycles);
 
   TNxChronometer = record
@@ -74,16 +78,51 @@ type
     function GetElapsedNs: UInt64;
     function GetElapsedSec: UInt64;
   public
+    ///  <summary>
+    ///    Initializes chronometer instance, but does not start measuring time 
+    ///  </summary>
     constructor Create(aMode: TNxChronoMode);
+    ///  <summary>
+    ///    Initializes chronometer instance and starts measuring time 
+    ///  </summary>
     constructor Start(aMode: TNxChronoMode); overload;
+    ///  <summary>
+    ///    Clears elapsed time and starts measuring 
+    ///  </summary>
     procedure Start; overload;
+    ///  <summary>
+    ///    Updates elapsed time, without stopping measurement
+    ///  </summary>
     procedure Split;
+    ///  <summary>
+    ///    Stops the measurement and updates elapsed time
+    ///  </summary>
     procedure Stop;
+    ///  <summary>
+    ///    Starts measuring time without clearing previously elapsed time.
+    ///    If chronometer was not stopped before calling Resume, the currently
+    ///    measured period is discarded
+    ///  </summary>
     procedure Resume;
+    ///  <summary>
+    ///    Stops the measurement and clears the elapsed time
+    ///  </summary>
     procedure Clear;
+    ///  <summary>
+    ///    Elapsed ticks in time modes or CPU cycles in cycles modes
+    ///  </summary>
     property Elapsed: UInt64 read fElapsed;
+    ///  <summary>
+    ///    Elapsed nanoseconds - meaningless in ProcessCycles and ThreadCycles mode
+    ///  </summary>
     property ElapsedNs: UInt64 read GetElapsedNs;
+    ///  <summary>
+    ///    Elapsed milliseconds - meaningless in ProcessCycles and ThreadCycles mode
+    ///  </summary>
     property ElapsedMs: UInt64 read GetElapsedMs;
+    ///  <summary>
+    ///    Elapsed seconds - meaningless in ProcessCycles and ThreadCycles mode
+    ///  </summary>
     property ElapsedSec: UInt64 read GetElapsedSec;
   end;
 
